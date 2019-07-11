@@ -7,9 +7,9 @@
 数据以字为单位输入模型，预训练词向量使用 [搜狗新闻 Word+Character 300d](https://github.com/Embedding/Chinese-Word-Vectors)
 
 ## 环境
-python 3.7
-pytorch 1.1
-tqdm
+python 3.7  
+pytorch 1.1  
+tqdm  
 sklearn
 
 ## 中文数据集
