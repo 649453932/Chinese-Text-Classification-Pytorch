@@ -8,6 +8,7 @@ import time
 from utils import get_time_dif
 
 
+# 权重初始化，默认xavier
 def init_network(model, method='xavier', exclude='embedding', seed=123):
     for name, w in model.named_parameters():
         if exclude not in name:
@@ -20,17 +21,16 @@ def init_network(model, method='xavier', exclude='embedding', seed=123):
                     nn.init.normal_(w)
             elif 'bias' in name:
                 nn.init.constant_(w, 0)
-            else: 
+            else:
                 pass
 
 
 def train(config, model, train_iter, dev_iter, test_iter):
     start_time = time.time()
     model.train()
-    # criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
 
-    # 学习率指数衰减，每次epoch：学习率 ×= gamma 
+    # 学习率指数衰减，每次epoch：学习率 = gamma * 学习率
     # scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.9)
     total_batch = 0  # 记录进行到多少batch
     dev_best_loss = float('inf')
@@ -43,10 +43,7 @@ def train(config, model, train_iter, dev_iter, test_iter):
         for i, (trains, labels) in enumerate(train_iter):
             outputs = model(trains)
             model.zero_grad()
-            # print(outputs.size())
-            # print(labels.size())
             loss = F.cross_entropy(outputs, labels)
-            # loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
             if total_batch % 100 == 0: 

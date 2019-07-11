@@ -133,7 +133,6 @@ class DatasetIterater(object):
             return self.n_batches + 1
         else:
             return self.n_batches
-        
 
 
 def build_iterator(dataset, config):
@@ -146,3 +145,23 @@ def get_time_dif(start_time):
     end_time = time.time()
     time_dif = end_time - start_time
     return timedelta(seconds=int(round(time_dif)))
+
+if __name__ == "__main__":
+    '''提取预训练词向量'''
+    vocab_dir = "./THUCNews/data/vocab.pkl"
+    pretrain_dir = "./THUCNews/data/sgns.sogou.char"
+    emb_dim = 300
+    filename_trimmed_dir = "./THUCNews/data/vocab.embedding.sougou"
+    word_to_id = pkl.load(open(vocab_dir, 'rb'))
+    embeddings = np.random.rand(len(word_to_id), emb_dim)
+    f = open(pretrain_dir, "r", encoding='UTF-8')
+    for i, line in enumerate(f.readlines()):
+        # if i == 0:  # 若第一行是标题，则跳过
+        #     continue
+        lin = line.strip().split(" ")
+        if lin[0] in word_to_id:
+            idx = word_to_id[lin[0]]
+            emb = [float(x) for x in lin[1:301]]
+            embeddings[idx] = np.asarray(emb, dtype='float32')
+    f.close()
+    np.savez_compressed(filename_trimmed_dir, embeddings=embeddings)
