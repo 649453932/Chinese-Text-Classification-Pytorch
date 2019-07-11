@@ -3,7 +3,7 @@
 
 中文文本分类，TextCNN，TextRNN，FastText，TextRCNN，BiLSTM_Attention，基于pytorch，开箱即用。
 ## 介绍
-每个模型详细介绍之后会写到我的博客上(待更新)。
+每个模型详细介绍之后会写到我的博客上(待更新)。  
 数据以字为单位输入模型，预训练词向量使用 [搜狗新闻 Word+Character 300d](https://github.com/Embedding/Chinese-Word-Vectors)
 
 ## 环境
