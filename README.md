@@ -24,6 +24,7 @@ sklearn
 验证集|1万
 测试集|1万
 
+
 ### 更换自己的数据集
 如果用字，按照我数据集的格式来格式化你的数据。
 如果用词，词之间用空格隔开，`python run.py --model TextCNN --word True`
@@ -64,7 +65,11 @@ bert
 
 ## 论文
 [1] Convolutional Neural Networks for Sentence Classification
+
 [2] Recurrent Neural Network for Text Classification with Multi-Task Learning
+
 [3] Attention-Based Bidirectional Long Short-Term Memory Networks for Relation Classification
+
 [4] Recurrent Convolutional Neural Networks for Text Classification
+
 [5] Bag of Tricks for Efficient Text Classification
