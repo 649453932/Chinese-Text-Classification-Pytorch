@@ -74,9 +74,11 @@ def build_dataset(config, ues_word):
                 buckets = config.n_gram_vocab
                 bigram = []
                 trigram = []
+                # ------ngram------
                 for i in range(pad_size):
                     bigram.append(biGramHash(words_line, i, buckets))
                     trigram.append(triGramHash(words_line, i, buckets))
+                # -----------------
                 contents.append((words_line, int(label), seq_len, bigram, trigram))
         return contents  # [([...], 0), ([...], 1), ...]
     train = load_dataset(config.train_path, config.pad_size)
