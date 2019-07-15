@@ -43,6 +43,7 @@ TextRNN|91.12%|BiLSTM
 TextRNN_Att|90.90%|BiLSTM+Attention
 TextRCNN|91.54%|BiLSTM+池化
 FastText|92.23%|bow+bigram+trigram， 效果出奇的好
+DPCNN|91.25%|深层金字塔CNN
 
 ## 使用说明
 ```
@@ -61,6 +62,9 @@ python run.py --model TextRCNN
 
 # FastText, embedding层是随机初始化的
 python run.py --model FastText --embedding random 
+
+# DPCNN
+python run.py --model DPCNN
 ```
 
 ### 参数

@@ -49,6 +49,7 @@ class Model(nn.Module):
         self.lstm = nn.LSTM(config.embed, config.hidden_size, config.num_layers,
                             bidirectional=True, batch_first=True, dropout=config.dropout)
         self.tanh1 = nn.Tanh()
+        # self.u = nn.Parameter(torch.Tensor(config.hidden_size * 2, config.hidden_size * 2))
         self.w = nn.Parameter(torch.Tensor(config.hidden_size * 2))
         self.tanh2 = nn.Tanh()
         self.fc1 = nn.Linear(config.hidden_size * 2, config.hidden_size2)
@@ -60,6 +61,7 @@ class Model(nn.Module):
         H, _ = self.lstm(emb)  # [batch_size, seq_len, hidden_size * num_direction]=[128, 32, 256]
 
         M = self.tanh1(H)  # [128, 32, 256]
+        # M = torch.tanh(torch.matmul(H, self.u))
         alpha = F.softmax(torch.matmul(M, self.w), dim=1).unsqueeze(-1)  # [128, 32, 1]
         out = H * alpha  # [128, 32, 256]
         out = torch.sum(out, 1)  # [128, 256]
