@@ -21,7 +21,7 @@ class Config(object):
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')   # 设备
 
         self.dropout = 0.5                                              # 随机失活
-        self.require_improvement = 1000                                 # 若超过1000batch效果还没提升，则提前结束训练
+        self.require_improvement = 1500                                 # 若超过1000batch效果还没提升，则提前结束训练
         self.num_classes = len(self.class_list)                         # 类别数
         self.n_vocab = 0                                                # 词表大小，在运行时赋值
         self.num_epochs = 10                                            # epoch数
@@ -35,6 +35,9 @@ class Config(object):
         self.last_hidden = 512
         self.num_head = 5
         self.num_encoder = 2
+
+
+'''Attention Is All You Need'''
 
 
 class Model(nn.Module):
