@@ -7,7 +7,7 @@ from importlib import import_module
 import argparse
 
 parser = argparse.ArgumentParser(description='Chinese Text Classification')
-parser.add_argument('--model', type=str, required=True, help='choose a model: TextCNN, TextRNN, FastText, TextRCNN, TextRNN_Att, DPCNN')
+parser.add_argument('--model', type=str, required=True, help='choose a model: TextCNN, TextRNN, FastText, TextRCNN, TextRNN_Att, DPCNN, Transformer')
 parser.add_argument('--embedding', default='pre_trained', type=str, help='random or pre_trained')
 parser.add_argument('--word', default=False, type=bool, help='True for word, False for char')
 args = parser.parse_args()
@@ -20,7 +20,7 @@ if __name__ == '__main__':
     embedding = 'embedding_SougouNews.npz'
     if args.embedding == 'random':
         embedding = 'random'
-    model_name = args.model  # 'TextRCNN'  # TextCNN, TextRNN, FastText, TextRCNN, TextRNN_Att, DPCNN
+    model_name = args.model  # 'TextRCNN'  # TextCNN, TextRNN, FastText, TextRCNN, TextRNN_Att, DPCNN, Transformer
     if model_name == 'FastText':
         from utils_fasttext import build_dataset, build_iterator, get_time_dif
         embedding = 'random'
@@ -46,6 +46,7 @@ if __name__ == '__main__':
     # train
     config.n_vocab = len(vocab)
     model = x.Model(config).to(config.device)
-    init_network(model)
+    if model_name != 'Transformer':
+        init_network(model)
     print(model.parameters)
     train(config, model, train_iter, dev_iter, test_iter)
