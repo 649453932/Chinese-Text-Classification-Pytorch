@@ -1,7 +1,7 @@
 # Chinese-Text-Classification-Pytorch
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
-中文文本分类，TextCNN，TextRNN，FastText，TextRCNN，BiLSTM_Attention，基于pytorch，开箱即用。
+中文文本分类，TextCNN，TextRNN，FastText，TextRCNN，BiLSTM_Attention, DPCNN, Transformer, 基于pytorch，开箱即用。
 
 ## 介绍
 模型介绍、数据流动过程：[我的博客](https://zhuanlan.zhihu.com/p/73176084)  
@@ -12,7 +12,8 @@
 python 3.7  
 pytorch 1.1  
 tqdm  
-sklearn
+sklearn  
+tensorboardX
 
 ## 中文数据集
 我从[THUCNews](http://thuctc.thunlp.org/)中抽取了20万条新闻标题，已上传至github，文本长度在20到30之间。一共10个类别，每类2万条。
