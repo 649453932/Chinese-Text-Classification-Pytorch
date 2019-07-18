@@ -45,7 +45,7 @@ TextRNN_Att|90.90%|BiLSTM+Attention
 TextRCNN|91.54%|BiLSTM+池化
 FastText|92.23%|bow+bigram+trigram， 效果出奇的好
 DPCNN|91.25%|深层金字塔CNN
-Transformer|89.91%|参数待精调
+Transformer|89.91%|效果较差
 
 ## 使用说明
 ```
