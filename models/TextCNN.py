@@ -17,6 +17,7 @@ class Config(object):
             dataset + '/data/class.txt').readlines()]                                # 类别名单
         self.vocab_path = dataset + '/data/vocab.pkl'                                # 词表
         self.save_path = dataset + '/saved_dict/' + self.model_name + '.ckpt'        # 模型训练结果
+        self.log_path = dataset + '/log/' + self.model_name
         self.embedding_pretrained = torch.tensor(
             np.load(dataset + '/data/' + embedding)["embeddings"].astype('float32'))\
             if embedding != 'random' else None                                       # 预训练词向量
@@ -57,6 +58,7 @@ class Model(nn.Module):
         return x
 
     def forward(self, x):
+        print(x[0].size())
         out = self.embedding(x[0])
         out = out.unsqueeze(1)
         out = torch.cat([self.conv_and_pool(out, conv) for conv in self.convs], 1)

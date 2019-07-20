@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+import copy
 
 
 class Config(object):
@@ -51,8 +52,10 @@ class Model(nn.Module):
             self.embedding = nn.Embedding(config.n_vocab, config.embed, padding_idx=config.n_vocab - 1)
 
         self.postion_embedding = Positional_Encoding(config.embed, config.pad_size, config.dropout, config.device)
+        self.encoder = Encoder(config.dim_model, config.num_head, config.hidden, config.dropout)
         self.encoders = nn.ModuleList([
-            Encoder(config.dim_model, config.num_head, config.hidden, config.dropout)
+            copy.deepcopy(self.encoder)
+            # Encoder(config.dim_model, config.num_head, config.hidden, config.dropout)
             for _ in range(config.num_encoder)])
 
         self.fc1 = nn.Linear(config.pad_size * config.dim_model, config.num_classes)
