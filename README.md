@@ -79,9 +79,11 @@ python run.py --model Transformer
  - transformer  
  - bert  
 
-## 论文
+## 对应论文
 [1] Convolutional Neural Networks for Sentence Classification  
 [2] Recurrent Neural Network for Text Classification with Multi-Task Learning  
 [3] Attention-Based Bidirectional Long Short-Term Memory Networks for Relation Classification  
 [4] Recurrent Convolutional Neural Networks for Text Classification  
 [5] Bag of Tricks for Efficient Text Classification  
+[6] Deep Pyramid Convolutional Neural Networks for Text Categorization  
+[7] Attention Is All You Need  
