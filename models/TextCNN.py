@@ -58,7 +58,6 @@ class Model(nn.Module):
         return x
 
     def forward(self, x):
-        print(x[0].size())
         out = self.embedding(x[0])
         out = out.unsqueeze(1)
         out = torch.cat([self.conv_and_pool(out, conv) for conv in self.convs], 1)

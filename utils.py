@@ -127,11 +127,20 @@ def get_time_dif(start_time):
 
 if __name__ == "__main__":
     '''提取预训练词向量'''
+    # 下面的目录、文件名按需更改。
+    train_dir = "./THUCNews/data/train.txt"
     vocab_dir = "./THUCNews/data/vocab.pkl"
     pretrain_dir = "./THUCNews/data/sgns.sogou.char"
     emb_dim = 300
-    filename_trimmed_dir = "./THUCNews/data/vocab.embedding.sougou"
-    word_to_id = pkl.load(open(vocab_dir, 'rb'))
+    filename_trimmed_dir = "./THUCNews/data/embedding_SougouNews"
+    if os.path.exists(vocab_dir):
+        word_to_id = pkl.load(open(vocab_dir, 'rb'))
+    else:
+        # tokenizer = lambda x: x.split(' ')  # 以词为单位构建词表(数据集中词之间以空格隔开)
+        tokenizer = lambda x: [y for y in x]  # 以字为单位构建词表
+        word_to_id = build_vocab(train_dir, tokenizer=tokenizer, max_size=MAX_VOCAB_SIZE, min_freq=1)
+        pkl.dump(word_to_id, open(vocab_dir, 'wb'))
+
     embeddings = np.random.rand(len(word_to_id), emb_dim)
     f = open(pretrain_dir, "r", encoding='UTF-8')
     for i, line in enumerate(f.readlines()):
