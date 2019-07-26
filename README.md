@@ -79,9 +79,6 @@ python run.py --model Transformer
 ### 参数
 模型都在models目录下，超参定义和模型定义在同一文件中。  
 
-## 未完待续
- - transformer  
- - bert  
 
 ## 对应论文
 [1] Convolutional Neural Networks for Sentence Classification  
