@@ -57,18 +57,18 @@ class Model(nn.Module):
     def forward(self, x):
         x = x[0]
         x = self.embedding(x)
-        x = x.unsqueeze(1)  # [batch_size, 1, seq_len, 1]
-        x = self.conv_region(x)  # [batch_size, 1, seq_len-3+1, 1]
+        x = x.unsqueeze(1)  # [batch_size, 250, seq_len, 1]
+        x = self.conv_region(x)  # [batch_size, 250, seq_len-3+1, 1]
 
-        x = self.padding1(x)  # [batch_size, 1, seq_len, 1]
+        x = self.padding1(x)  # [batch_size, 250, seq_len, 1]
         x = self.relu(x)
-        x = self.conv(x)  # [batch_size, 1, seq_len-3+1, 1]
-        x = self.padding1(x)  # [batch_size, 1, seq_len, 1]
+        x = self.conv(x)  # [batch_size, 250, seq_len-3+1, 1]
+        x = self.padding1(x)  # [batch_size, 250, seq_len, 1]
         x = self.relu(x)
-        x = self.conv(x)  # [batch_size, 1, seq_len-3+1, 1]
+        x = self.conv(x)  # [batch_size, 250, seq_len-3+1, 1]
         while x.size()[2] > 2:
             x = self._block(x)
-        x = x.squeeze()  # [batch_size, num_filters]
+        x = x.squeeze()  # [batch_size, num_filters(250)]
         x = self.fc(x)
         return x
 
