@@ -46,8 +46,8 @@ TextRCNN|91.54%|BiLSTM+池化
 FastText|92.23%|bow+bigram+trigram， 效果出奇的好
 DPCNN|91.25%|深层金字塔CNN
 Transformer|89.91%|效果较差
-bert|94.04%|bert + fc  
-ERNIE|92.75%|比bert略差(说好的中文碾压bert呢)  
+bert|94.83%|bert + fc  
+ERNIE|94.61%|比bert略差(说好的中文碾压bert呢)  
 
 bert和ERNIE模型代码我放到另外一个仓库了，传送门：[Bert-Chinese-Text-Classification-Pytorch](https://github.com/649453932/Bert-Chinese-Text-Classification-Pytorch)，后续还会搞一些bert之后的东西，欢迎star。  
 
@@ -79,9 +79,6 @@ python run.py --model Transformer
 ### 参数
 模型都在models目录下，超参定义和模型定义在同一文件中。  
 
-## 未完待续
- - transformer  
- - bert  
 
 ## 对应论文
 [1] Convolutional Neural Networks for Sentence Classification  
