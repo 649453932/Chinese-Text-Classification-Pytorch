@@ -6,7 +6,7 @@
 ## 介绍
 模型介绍、数据流动过程：[我的博客](https://zhuanlan.zhihu.com/p/73176084)  
 
-数据以字为单位输入模型，预训练词向量使用 [搜狗新闻 Word+Character 300d](https://github.com/Embedding/Chinese-Word-Vectors)
+数据以字为单位输入模型，预训练词向量使用 [搜狗新闻 Word+Character 300d](https://github.com/Embedding/Chinese-Word-Vectors)，[点这里下载](https://pan.baidu.com/s/14k-9jsspp43ZhMxqPmsWMQ)  
 
 ## 环境
 python 3.7  
