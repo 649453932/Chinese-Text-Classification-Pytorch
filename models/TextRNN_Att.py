@@ -38,6 +38,30 @@ class Config(object):
         self.hidden_size2 = 64
 
 
+class SelfAttention(nn.Module):
+    """
+    scores each element of the sequence with a linear layer and uses the normalized scores to compute a context over the sequence.
+    """
+
+    def __init__(self, d_hid, dropout=0.):
+        super().__init__()
+        self.scorer = nn.Linear(d_hid, 1)
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, input_seq, lens=None):
+        batch_size, seq_len, feature_dim = input_seq.size()
+        input_seq = self.dropout(input_seq)
+        scores = self.scorer(input_seq.contiguous().view(-1, feature_dim)).view(batch_size, seq_len)
+        if lens!=None:
+          max_len = max(lens)
+          for i, l in enumerate(lens):
+            if l < max_len:
+                scores.data[i, l:] = -np.inf
+        scores = F.softmax(scores, dim=1)
+        context = scores.unsqueeze(2).expand_as(input_seq).mul(input_seq).sum(1)
+        return context # 既然命名为context就应该是整句的表示
+
+
 '''Attention-Based Bidirectional Long Short-Term Memory Networks for Relation Classification'''
 
 
@@ -56,18 +80,18 @@ class Model(nn.Module):
         self.tanh2 = nn.Tanh()
         self.fc1 = nn.Linear(config.hidden_size * 2, config.hidden_size2)
         self.fc = nn.Linear(config.hidden_size2, config.num_classes)
+        self.self_attention = SelfAttention(config.hidden_size * 2)
 
     def forward(self, x):
         x, _ = x
         emb = self.embedding(x)  # [batch_size, seq_len, embeding]=[128, 32, 300]
         H, _ = self.lstm(emb)  # [batch_size, seq_len, hidden_size * num_direction]=[128, 32, 256]
 
-        M = self.tanh1(H)  # [128, 32, 256]
-        # M = torch.tanh(torch.matmul(H, self.u))
-        alpha = F.softmax(torch.matmul(M, self.w), dim=1).unsqueeze(-1)  # [128, 32, 1]
-        out = H * alpha  # [128, 32, 256]
-        out = torch.sum(out, 1)  # [128, 256]
-        out = F.relu(out)
+        # M = self.tanh1(H)  # [128, 32, 256]
+
+        H_attn = self.self_attention(H)
+
+        out = F.relu(H_attn)
         out = self.fc1(out)
         out = self.fc(out)  # [128, 64]
         return out
