@@ -94,7 +94,7 @@ class DatasetIterater(object):
             batches = self._to_tensor(batches)
             return batches
 
-        elif self.index > self.n_batches:
+        elif self.index >= self.n_batches:
             self.index = 0
             raise StopIteration
         else:
