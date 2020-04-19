@@ -52,7 +52,7 @@ class Model(nn.Module):
                             bidirectional=True, batch_first=True, dropout=config.dropout)
         self.tanh1 = nn.Tanh()
         # self.u = nn.Parameter(torch.Tensor(config.hidden_size * 2, config.hidden_size * 2))
-        self.w = nn.Parameter(torch.Tensor(config.hidden_size * 2))
+        self.w = nn.Parameter(torch.zeros(config.hidden_size * 2))
         self.tanh2 = nn.Tanh()
         self.fc1 = nn.Linear(config.hidden_size * 2, config.hidden_size2)
         self.fc = nn.Linear(config.hidden_size2, config.num_classes)
