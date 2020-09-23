@@ -74,7 +74,7 @@ class DatasetIterater(object):
         self.batches = batches
         self.n_batches = len(batches) // batch_size
         self.residue = False  # 记录batch数量是否为整数
-        if len(batches) % self.n_batches != 0:
+        if len(batches) % batch_size != 0:
             self.residue = True
         self.index = 0
         self.device = device
